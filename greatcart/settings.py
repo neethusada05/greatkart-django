@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,7 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+#Authentication backends
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -123,10 +127,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+#STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
-    'greatcart/static',
+   BASE_DIR / "static", "/var/www/static/",
 ]
+# STATIC_ROOT = BASE_DIR / 'static'
+# STATICFILES_DIRS = [
+#   'greatcart/static',
+# ]
+
 
 # Media Files Configurations
 MEDIA_URL = '/media/'
@@ -137,3 +146,17 @@ MEDIA_ROOT = BASE_DIR/'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django Messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
+
+# SMTP configuration
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # gmail port
+EMAIL_HOST_USER = 'neethusan07@gmail.com'
+EMAIL_HOST_PASSWORD = 'dgfo quaz mjlj xiwl'  # App password of gail account (if it is not gmail, then use login password)
+EMAIL_USE_TLS = True
